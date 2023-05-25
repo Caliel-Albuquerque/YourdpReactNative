@@ -1,7 +1,9 @@
 import React, { useState } from "react";
-import firebaseConfig from "../../config/firebase";
-import { firebase } from "@firebase/app";
-import "@firebase/auth";
+
+import { Alert } from "react-native";
+
+import { auth } from "../../config/firebaseConfig";
+
 import {
     SafeAreaView,
     TextInput,
@@ -16,10 +18,22 @@ export function LoginScreen() {
     const [error, setError] = useState("");
 
     const handleLogin = () => {
-        firebase
-            .auth()
+        auth()
             .signInWithEmailAndPassword(email, password)
-            .catch((err) => setError(err.message));
+            .then(() => {
+                Alert.alert('Oba', 'Deu tudo certo')
+            })
+            .catch(error => {
+                if (error.code === 'auth/email-already-in-use') {
+                    console.log('That email address is already in use!');
+                }
+
+                if (error.code === 'auth/invalid-email') {
+                    console.log('That email address is invalid!');
+                }
+
+                console.error(error);
+            });
     };
 
     return (
