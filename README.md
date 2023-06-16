@@ -27,10 +27,18 @@
   </span>
   
   <span>
-    <img src="https://user-images.githubusercontent.com/105212500/232110414-47bdbde8-8701-4aca-910c-997a1e5c16a6.png" width="267px" hight="497px" />
+    <img src="https://github.com/Caliel-Albuquerque/ReactNativeApp-Yourdp/assets/75955275/8259ac65-a721-4fea-9350-095823d8057b" width="267px" hight="497px" />
   </span>
   
   <span>
-    <img src="https://user-images.githubusercontent.com/105212500/232110970-fbc1f21a-d707-4cff-ad42-2a42059f4afa.png" width="267px" hight="497px" />
+    <img src="https://github.com/Caliel-Albuquerque/ReactNativeApp-Yourdp/assets/75955275/1b597d58-502b-4f07-881d-4103fe26be14" width="267px" hight="497px" />
+  </span>
+
+  <span>
+    <img src="https://github.com/Caliel-Albuquerque/ReactNativeApp-Yourdp/assets/75955275/d10bd1b3-c001-42f3-b849-a9013a92b8a6" width="267px" hight="497px" />
+  </span>
+
+  <span>
+    <img src="https://github.com/Caliel-Albuquerque/ReactNativeApp-Yourdp/assets/75955275/9b832550-f503-4a8f-9156-be87f80aec21" width="267px" hight="497px" />
   </span>
 </div># ReactNativeApp-Yourdp
