@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, Alert } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
 
 import * as SecureStore from 'expo-secure-store';
-export function TopBar() {
+export function TopBar({onUserDataLoaded}) {
 
     const [userData, setUserData] = useState(null);
 
@@ -24,6 +24,7 @@ export function TopBar() {
 
                     if (response.ok) {
                         const data = await response.json();
+                        onUserDataLoaded(data);
                         // console.log(data)
                         setUserData(data);
                     } else {
@@ -57,9 +58,9 @@ export function TopBar() {
 
 
     const userDataName = userData?.msg?.name ? userData.msg.name : 'Carregando...'
-    console.log(userDataName);
+    // console.log(userDataName);
 
-    console.log(userData)
+    // console.log(userData)
 
 
     return (

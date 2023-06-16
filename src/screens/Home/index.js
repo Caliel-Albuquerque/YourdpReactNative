@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Container } from "../Styles";
-import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Modal } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message'
 
@@ -38,7 +38,7 @@ export function Home() {
     //Senac Lat: -8.052366292279732, Long:-34.88525659188676
     //Casa latitude: -7.9895394, longitude: -34.8621279,
 
-    
+
 
     const RADIUS = 700; // raio em metros
     const FIXED_LOCATION = {
@@ -110,8 +110,22 @@ export function Home() {
         checkLocation();
     }, [location])
 
+    const [modalVisible, setModalVisible] = useState(false);
+
+    function handleModalVisible() {
+        setModalVisible(true)
+    }
+
+    const [userData, setUserData] = useState(null);
+
+    const handleUserDataLoaded = (data) => {
+        setUserData(data.msg.ponto);
+    };
+
+    
 
 
+    console.log(userData)
 
     return (
         <Container>
@@ -119,7 +133,7 @@ export function Home() {
 
             <ScrollView stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollStyle} style={{ width: '100%' }}>
 
-                <TopBar />
+                <TopBar onUserDataLoaded={handleUserDataLoaded} />
 
                 <View style={styles.mapContainer}>
                     {
@@ -153,11 +167,47 @@ export function Home() {
                     Status={canPunch}
                 />
 
-                <TouchableOpacity style={styles.btnRelato}><Text style={styles.text}>Últimos Registros</Text><Ionicons name="arrow-down" size={24} color="#000" /></TouchableOpacity>
+                <TouchableOpacity onPress={handleModalVisible} style={styles.btnRelato}><Text style={styles.text}>Últimos Registros</Text><Ionicons name="arrow-down" size={24} color="#000" /></TouchableOpacity>
 
 
 
             </ScrollView>
+
+            <Modal
+                visible={modalVisible}
+                animationType="slide"
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <View style={styles.modalContainer}>
+
+
+                    <View style={styles.table}>
+                        {/* Cabeçalho da tabela */}
+                        <View style={styles.tableRow}>
+                            <Text style={styles.tableHeaderCell}>data</Text>
+                            <Text style={styles.tableHeaderCell}>Entrada</Text>
+                            <Text style={styles.tableHeaderCell}>Saida</Text>
+                        </View>
+
+                        {/* Dados da tabela */}
+                        {userData ? (
+                            userData.map((item) => (
+                                <View key={item._id} style={styles.tableRow}>
+                                    <Text style={styles.tableCell}>{item.data}</Text>
+                                    <Text style={styles.tableCell}>{item.entrada}</Text>
+                                    <Text style={styles.tableCell}>{item.saida}</Text>
+                                </View>
+                            ))
+                        ) : (
+                            <Text>Aguardando carregamento dos dados...</Text>
+                        )}
+                    </View>
+                    <TouchableOpacity style={styles.iconModal} title="Fechar Modal" onPress={() => setModalVisible(false)}>
+                        <Text style={styles.textModal}>x</Text>
+                    </TouchableOpacity>
+                </View>
+            </Modal>
+
 
         </Container>
     )
@@ -210,7 +260,43 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 24,
         fontWeight: 'bold'
-    }
+    },
+    iconModal: {
+        position: 'absolute',
+        top: 0,
+        right: 0,
+        padding: 50,
+    },
+    textModal: {
+        fontWeight: '500',
+        fontSize: 30,
+        color: '#FFFFFF',
+    },
+    modalContainer: {
+        height: '100%',
+        backgroundColor: 'rgba(0, 0, 0, 0.5)' // cor de fundo do modal (semi-transparente)
+    },
+    table: {
+        borderWidth: 1,
+        borderColor: '#000000',
+        marginBottom: 10,
+        marginTop: 200,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    tableRow: {
+        flexDirection: 'row',
+    },
+    tableHeaderCell: {
+        flex: 1,
+        padding: 10,
+        fontWeight: 'bold',
+        backgroundColor: '#CCCCCC',
+    },
+    tableCell: {
+        flex: 1,
+        padding: 10,
+    },
 })
 
 
