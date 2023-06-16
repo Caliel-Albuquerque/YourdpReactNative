@@ -12,6 +12,7 @@
 * Ele poderá entras nas principais funcionalidades do GOV(fgts, carteira de trabalho etc)
 * Poderá mandar para a emprsa justificativa de falta, por meio de um formulário 
 * Poderá mandar para a emprsa uma solicitação de férias para a empresa, por meio de um formulário
+* O app conta com autenticação JWT e envio de imagens para um banco de imagens na nuvem
 
 ### Link Figma
 (https://www.figma.com/file/48S8A691ts9008aX59dcyJ/YourDP?node-id=0%3A1&t=Bmlf3m1aAaHDNDZq-1)
