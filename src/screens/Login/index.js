@@ -12,7 +12,8 @@ import {
     Text,
     ActivityIndicator,
     Alert,
-    TouchableOpacity
+    TouchableOpacity,
+    Image
 } from "react-native";
 
 import axios from 'axios';
@@ -55,7 +56,8 @@ export function LoginScreen({ onLoginSuccess }) {
 
     return (
         <SafeAreaView style={styles.container}>
-            <Text style={styles.heading}>Login</Text>
+            {/* <Text style={styles.heading}>Login</Text> */}
+            <Image style={styles.imageLogo} source={require('../../../assets/LogoApp.webp')} />
             <TextInput
                 placeholder="Email"
                 value={email}
@@ -127,4 +129,7 @@ const styles = StyleSheet.create({
         fontSize: 24,
         color: '#FFFFFF',
     },
+    imageLogo:{
+        marginBottom: 20,
+    }
 });

@@ -1,4 +1,4 @@
-import { ScrollView, Text, StyleSheet, View } from "react-native"
+import { ScrollView, Text, StyleSheet, View, Image } from "react-native"
 
 import { TopBar } from "../../components/Topbar"
 import { Container } from "../Styles"
@@ -11,7 +11,7 @@ export function Ferias() {
 
                 <View style={styles.container}>
                     <View style={styles.card}>
-                        {/* <Image source={require('./assets/card.png')} style={[styles.image, { alignSelf: 'center' }]} /> */}
+                        <Image source={require('../../../assets/card.png')} style={[styles.image, { alignSelf: 'center' }]} />
                         <Text style={styles.text}>Férias Solicitadas</Text>
                         <Text style={styles.text0}>Dias de Férias</Text>
                         <Text style={styles.text1}>Status</Text>
@@ -23,7 +23,7 @@ export function Ferias() {
                         <Text style={styles.text2}>20 dias</Text>
                     </View>
                     <View style={styles.card}>
-                        {/* <Image source={require('./assets/card.png')} style={[styles.image, { alignSelf: 'center' }]} /> */}
+                        <Image source={require('../../../assets/card.png')} style={[styles.image, { alignSelf: 'center' }]} />
                         <Text style={styles.text}>Férias Solicitadas</Text>
                         <Text style={styles.text0}>Dias de Férias</Text>
                         <Text style={styles.text1}>Status</Text>
