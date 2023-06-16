@@ -18,14 +18,21 @@ export function DateComponent() {
 
 
 
-    const timeOptions = {hour: 'numeric', minute: 'numeric'}
+    const timeOptions = { hour: 'numeric', minute: 'numeric' }
 
     return (
 
-        <InputInfo
-            Date={date.toLocaleDateString()}
-            Hour={date.toLocaleTimeString([], timeOptions)}
-        />
+
+        <>
+
+            <InputInfo
+                Date={date.toLocaleDateString()}
+                Hour={date.toLocaleTimeString([], timeOptions)}
+            />
+
+        
+        </>
+
 
     )
 }

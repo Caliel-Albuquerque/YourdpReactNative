@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-import { Alert } from "react-native";
 
-import { auth } from "../../config/firebaseConfig";
+
+import * as SecureStore from 'expo-secure-store';
 
 import {
     SafeAreaView,
@@ -10,31 +10,48 @@ import {
     Button,
     StyleSheet,
     Text,
+    ActivityIndicator,
+    Alert,
+    TouchableOpacity
 } from "react-native";
 
-export function LoginScreen() {
+import axios from 'axios';
+
+export function LoginScreen({ onLoginSuccess }) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState("");
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleLogin = () => {
-        auth()
-            .signInWithEmailAndPassword(email, password)
-            .then(() => {
-                Alert.alert('Oba', 'Deu tudo certo')
-            })
-            .catch(error => {
-                if (error.code === 'auth/email-already-in-use') {
-                    console.log('That email address is already in use!');
-                }
+    const handleLogin = async () => {
 
-                if (error.code === 'auth/invalid-email') {
-                    console.log('That email address is invalid!');
-                }
+        try {
+            setIsLoading(true);
 
-                console.error(error);
+
+
+            const response = await axios.post('https://api-yourdp.onrender.com/auth/user', {
+                email,
+                password,
             });
-    };
+
+            console.log(response)
+
+            if (response.data.token) {
+                await SecureStore.setItemAsync('token', response.data.token);
+                await SecureStore.setItemAsync('idUser', response.data.idUser);
+                onLoginSuccess();
+            } else {
+                Alert.alert('Erro', response.data.message);
+            }
+
+            setIsLoading(false);
+        } catch (err) {
+            setIsLoading(false);
+            console.error('Erro ao fazer login:', err);
+
+            Alert.alert('Erro', 'Ocorreu um erro ao fazer login. Por favor, tente novamente mais tarde.');
+        }
+    }
 
     return (
         <SafeAreaView style={styles.container}>
@@ -46,16 +63,23 @@ export function LoginScreen() {
                 style={styles.input}
             />
             <TextInput
-                placeholder="Password"
+                placeholder="Senha"
                 value={password}
                 onChangeText={setPassword}
                 secureTextEntry
                 style={styles.input}
             />
-            {error ? <Text style={styles.error}>{error}</Text> : null}
-            <Button title="Log in" onPress={handleLogin} />
+
+            
+            <TouchableOpacity style={styles.btn} onPress={handleLogin}>
+                <Text style={styles.textBtn}>Entrar</Text>
+            </TouchableOpacity>
+            {isLoading && <ActivityIndicator />}
         </SafeAreaView>
     );
+
+
+
 }
 
 const styles = StyleSheet.create({
@@ -80,5 +104,27 @@ const styles = StyleSheet.create({
     error: {
         color: "red",
         marginBottom: 16,
+    },
+    btn: {
+        backgroundColor: '#2D1CC6',
+        borderRadius: 20,
+        width: 355,
+        height: 58,
+        shadowColor: '#000000',
+        shadowOpacity: 0.1,
+        shadowOffset: {
+            width: 0,
+            height: 2
+        },
+        shadowRadius: 10,
+        borderWidth: 0,
+        justifyContent: 'center',
+        alignItems: 'center',
+        marginTop: 20
+    },
+    textBtn: {
+        fontWeight: '500',
+        fontSize: 24,
+        color: '#FFFFFF',
     },
 });

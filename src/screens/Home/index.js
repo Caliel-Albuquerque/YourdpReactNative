@@ -2,6 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Container } from "../Styles";
 import { StyleSheet, View, Text, ScrollView, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+import Toast from 'react-native-toast-message'
+
+// import * as SecureStore from 'expo-secure-store';
+// import jwt from 'jsonwebtoken';
+// import { Buffer } from "buffer";
+// import Constants from 'expo-constants';
+// import jwtDecode from 'jwt-decode';
+// import { Buffer } from "buffer"
+
+
+
 
 import {
     requestForegroundPermissionsAsync,
@@ -27,11 +38,12 @@ export function Home() {
     //Senac Lat: -8.052366292279732, Long:-34.88525659188676
     //Casa latitude: -7.9895394, longitude: -34.8621279,
 
+    
 
     const RADIUS = 700; // raio em metros
     const FIXED_LOCATION = {
-        latitude: -8.052366292279732,
-        longitude: -34.88525659188676,
+        latitude: -7.9895394,
+        longitude: -34.8621279,
     };
 
 
@@ -65,7 +77,7 @@ export function Home() {
             const currentPosition = await getCurrentPositionAsync();
             setLocation(currentPosition);
 
-            console.log(currentPosition)
+            // console.log(currentPosition)
         }
     }
 
@@ -92,14 +104,14 @@ export function Home() {
         async function checkLocation() {
             const distance = calculateDistance(location.coords, FIXED_LOCATION);
             setCanPunch(distance >= RADIUS);
-            console.log(distance)
+            // console.log(distance)
         }
 
         checkLocation();
-    }, [])
+    }, [location])
 
 
-   
+
 
     return (
         <Container>

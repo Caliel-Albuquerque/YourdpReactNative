@@ -1,7 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from '@expo/vector-icons';
 
-import { Justificativa } from "../screens/Justificativa";
+// import { Justificativa } from "../screens/Justificativa";
+
+import JustificativaForm from '../screens/Justificativa/index'
+
 import { Home } from "../screens/Home";
 import { Ferias } from "../screens/Ferias";
 import { ContraCheque } from "../screens/ContraCheque";
@@ -105,7 +108,7 @@ export function TabRoutes() {
                         return <Ionicons name={iconName} size={25} color='#2D1CC6' />;
                     }
                 }}
-                component={Justificativa}
+                component={JustificativaForm}
             />
 
             <Screen

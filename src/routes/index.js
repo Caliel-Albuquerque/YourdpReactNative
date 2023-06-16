@@ -2,12 +2,6 @@ import React, { useState, useEffect } from "react";
 
 import { NavigationContainer } from "@react-navigation/native";
 
-import auth from '@react-native-firebase/auth';
-
-
-
-
-import { AuthRoutes } from "./auth.routes";
 import { TabRoutes } from "./tabs.routes";
 import { LoginScreen } from "../screens/Login";
 import Toast from 'react-native-toast-message'
@@ -15,19 +9,27 @@ import Toast from 'react-native-toast-message'
 
 export function Routes() {
 
+    const [isLogged, setIsLogged] = useState(false)
+
+    const handleLoginSuccess = () => {
+        setIsLogged(true);
+    };
 
     return (
 
         <>
+
             <NavigationContainer>
 
-                <TabRoutes /> 
+                {
+                    isLogged ? (
+                        <TabRoutes />
+                    ) : (
+                        <LoginScreen onLoginSuccess={handleLoginSuccess}/>
+                    )
+                }
 
-                {/* <AuthRoutes>
-                    <LoginScreen />
-                </AuthRoutes> */}
 
-                {/* <LoginScreen /> */}
 
             </NavigationContainer>
 
