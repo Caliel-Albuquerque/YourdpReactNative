@@ -1,13 +1,21 @@
+import { useState } from "react";
 import { ScrollView, Text, StyleSheet, Image, View } from "react-native"
 
 import { TopBar } from "../../components/Topbar"
 import { Container } from "../Styles"
 
 export function ContraCheque() {
+
+    const [userData, setUserData] = useState(null);
+
+    const handleUserDataLoaded = (data) => {
+        setUserData(data.msg.ponto);
+    };
+
     return (
         <Container>
             <ScrollView stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollStyle} style={{ width: '100%' }}>
-                <TopBar />
+                <TopBar onUserDataLoaded={handleUserDataLoaded} />
 
                 <View style={styles.container}>
                     <Text style={styles.title}>Contracheque</Text>
@@ -48,28 +56,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         overflow: 'hidden',
         paddingBottom: 75,
-      },
-      title: {
+    },
+    title: {
         fontStyle: 'normal',
         fontWeight: '700',
         fontSize: 26,
         lineHeight: 34,
         textAlign: 'center',
         color: '#1B1E28',
-      },
-      dataList: {
+    },
+    dataList: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: 16,
         marginBottom: 16,
-      },
-      contentList: {
+    },
+    contentList: {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
         gap: 32,
-      },
+    },
 
 
 })

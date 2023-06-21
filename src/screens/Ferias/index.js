@@ -1,13 +1,21 @@
+import { useState } from "react";
 import { ScrollView, Text, StyleSheet, View, Image } from "react-native"
 
 import { TopBar } from "../../components/Topbar"
 import { Container } from "../Styles"
 
 export function Ferias() {
+
+    const [userData, setUserData] = useState(null);
+
+    const handleUserDataLoaded = (data) => {
+        setUserData(data.msg.ponto);
+    };
+
     return (
         <Container>
             <ScrollView stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollStyle} style={{ width: '100%' }}>
-                <TopBar />
+                <TopBar onUserDataLoaded={handleUserDataLoaded}/>
 
                 <View style={styles.container}>
                     <View style={styles.card}>

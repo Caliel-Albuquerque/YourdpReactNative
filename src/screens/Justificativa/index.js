@@ -20,12 +20,18 @@ const JustificativaForm = () => {
         console.log('Imagem enviada');
     };
 
+    const [userData, setUserData] = useState(null);
+
+    const handleUserDataLoaded = (data) => {
+        setUserData(data.msg.ponto);
+    };
+
     return (
 
 
         <Container>
             <ScrollView stickyHeaderIndices={[0]} showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollStyle} style={{ width: '100%' }}>
-                <TopBar />
+                <TopBar onUserDataLoaded={handleUserDataLoaded}/>
 
                 <View style={styles.container}>
                     <View style={styles.form}>
