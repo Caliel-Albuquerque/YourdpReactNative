@@ -149,7 +149,7 @@ export function ButtonPoint(props) {
                         <Text style={styles.titleModal}>Entrada:</Text>
                         <DateComponent />
                         <TouchableOpacity style={styles.btnModal} onPress={handleUpdatePoint}>
-                            <Text style={styles.textModal}>Bater ponto</Text>
+                            <Text style={styles.textBtn}>Bater ponto</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -157,7 +157,23 @@ export function ButtonPoint(props) {
                         <Text style={styles.titleModal}>Saida:</Text>
                         <DateComponent />
                         <TouchableOpacity style={styles.btnModal} onPress={handleUpdateLastPoint }>
-                            <Text style={styles.textModal}>Bater ponto</Text>
+                            <Text style={styles.textBtn}>Bater ponto</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.cardModal}>
+                        <Text style={styles.titleModal}>Saida:</Text>
+                        <DateComponent />
+                        <TouchableOpacity style={styles.btnModal} onPress={handleUpdateLastPoint }>
+                            <Text style={styles.textBtn}>Bater ponto</Text>
+                        </TouchableOpacity>
+                    </View>
+
+                    <View style={styles.cardModal}>
+                        <Text style={styles.titleModal}>Saida:</Text>
+                        <DateComponent />
+                        <TouchableOpacity style={styles.btnModal} onPress={handleUpdateLastPoint }>
+                            <Text style={styles.textBtn}>Bater ponto</Text>
                         </TouchableOpacity>
                     </View>
 
@@ -210,7 +226,7 @@ const styles = StyleSheet.create({
 
     iconModal: {
         position: 'absolute',
-        top: 0,
+        top: -40,
         right: 0,
         padding: 50,
     },
@@ -231,7 +247,11 @@ const styles = StyleSheet.create({
     textModal: {
         fontWeight: '500',
         fontSize: 30,
-        color: '#FFFFFF',
+        color: '#000',
+    },
+
+    textBtn:{
+        color: '#fff',
     },
 
     btnBlock: {
@@ -247,7 +267,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: 'rgba(0, 0, 0, 0.5)' // cor de fundo do modal (semi-transparente)
+        backgroundColor: '#fff' // cor de fundo do modal (semi-transparente)
     },
 
 })

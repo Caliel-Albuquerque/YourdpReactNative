@@ -4,6 +4,8 @@ import { StyleSheet, View, Text, ScrollView, TouchableOpacity, Modal } from 'rea
 import { Ionicons } from '@expo/vector-icons';
 import Toast from 'react-native-toast-message'
 
+import * as SecureStore from 'expo-secure-store';
+
 // import * as SecureStore from 'expo-secure-store';
 // import jwt from 'jsonwebtoken';
 // import { Buffer } from "buffer";
@@ -112,17 +114,36 @@ export function Home() {
 
     const [modalVisible, setModalVisible] = useState(false);
 
-    function handleModalVisible() {
-        setModalVisible(true)
-    }
 
     const [userData, setUserData] = useState(null);
 
+    async function fetchModalData() {
+        try {
+            const id = await SecureStore.getItemAsync('idUser');
+
+            // Verificar se o ID é válido antes de fazer a chamada à API
+            if (id) {
+                const response = await fetch(`https://api-yourdp.onrender.com/user/${id}`);
+                const data = await response.json();
+                setUserData(data.msg.ponto);
+            } else {
+                console.error('ID do usuário não encontrado.');
+            }
+        } catch (error) {
+            console.error('Erro ao buscar informações do modal:', error);
+        }
+    }
+
+
     const handleUserDataLoaded = (data) => {
-        setUserData(data.msg.ponto);
+
     };
 
-    
+    function handleModalVisible() {
+        setModalVisible(true)
+        fetchModalData()
+    }
+
 
 
     console.log(userData)
